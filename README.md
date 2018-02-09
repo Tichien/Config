@@ -1,0 +1,3 @@
+# Config
+
+Des fichiers de configurations divers comme .bashrc, .emacs, .vimrc etc...

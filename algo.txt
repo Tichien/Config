@@ -2,3 +2,5 @@ git branch -a => list all branches
 git config --list => list config
 
 to diff => git fetch before
+
+origin

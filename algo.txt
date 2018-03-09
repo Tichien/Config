@@ -3,3 +3,4 @@ git config --list => list config
 
 to diff => git fetch before
 
+origin

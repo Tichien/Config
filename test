@@ -1,5 +1,16 @@
 #!/bin/bash
 
+
+branch_is_late(){
+	result=$(git diff master origin)
+	[ -n "$result" ]
+}
+
+branch_is_ahead(){
+	result=$(git diff)
+	[ -n "$result" ]
+}
+
 # Si un commit est necessaire renvoie vrai sinon faux
 commitneeded (){
     status=$(git status)
@@ -55,14 +66,14 @@ pullall () {
     echo ""
 }
 
-if commitneeded; then
-	echo "Il faut ajouter de fichiers"
+if branch_is_late; then
+	echo "Je suis en retard"
 else
-	echo "Aucun fichier a ajouter"
+	echo "Je ne suis pas en retard"
 fi
 
-if unmergedfile; then
-	echo "Des fichiers n'ont pas été fusionnés"
+if branch_is_ahead; then
+	echo "Je suis en avance"
 else
-	echo "Tous les fichiers ont été fusionnés"
+	echo "Je ne suis pas en avence"
 fi

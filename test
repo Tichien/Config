@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Si un commit est necessaire renvoie vrai sinon faux
+commitneeded (){
+    status=$(git status)
+    result=$(echo "$status" | grep "git add")
+    # Si result est une chaine non nulle renvoie vrai sinon faux
+    [ -n "$result" ]
+}
+
+# Si il existe un fichier qui n'a pas été fusionné renvoie vrai sinon renvoie faux
+unmergedfile (){
+    status=$(git status)
+    result=$(echo "$status" | grep "both modified")
+    # Si result est une chaine non nulle renvoie vrai sinon faux
+    [ -n "$result" ]
+}
+
+# Commission de tous les changements apportés à la branche locale
+commitall () {
+    echo "-Commission des données locales..."
+    git add -A
+    git commit -m "Mise à jour"
+    echo "-Fait"
+    echo ""
+}
+
+# Met en ligne les données locales mofifiées/ajoutées
+pushall () {
+    echo "-Mise en ligne des données locales..."
+    git push origin master
+    echo "-Fait"
+    echo ""
+}
+
+# Fusionne les données de la branche locale avec les données de master
+pullall () {
+    echo "-Fusion des données locales avec les données de master..."
+    
+    pull=$(git pull)
+    conflict=$(echo "$pull" | grep "CONFLICT")
+
+    if [ -n "$conflict" ]
+    then
+    echo ""
+	echo "Des conflits on été detecté:"
+	echo "$conflict"
+	echo ""
+	echo "Attention à ne pas perdre de données à la prochaine mise à jour"
+    else
+	echo "$pull"
+    fi
+    
+    echo "-Fait"
+    echo ""
+}
+
+if commitneeded; then
+	echo "Il faut ajouter de fichiers"
+else
+	echo "Aucun fichier a ajouter"
+fi
+
+if unmergedfile; then
+	echo "Des fichiers n'ont pas été fusionnés"
+else
+	echo "Tous les fichiers ont été fusionnés"
+fi

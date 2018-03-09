@@ -1,7 +1,4 @@
 #!/bin/bash
-
-# supprime les fichier temporaire contenant "~" créé sous linux
-# find . -name "*~" -type f -delete
  
 # definitions des fonctions: 
 

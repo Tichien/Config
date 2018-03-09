@@ -3,10 +3,6 @@ git config --list => list config
 
 to diff => git fetch before
 
-<<<<<<< HEAD
-
-
 origin
-=======
+
 master
->>>>>>> 73fbd6fce55df9e7ef67c06979564c4c53c4e351

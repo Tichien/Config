@@ -4,3 +4,5 @@ to diff => git fetch before
 
 git diff --name-only --diff-filter=U => renvoie les fichiers qui n'ont pas été fusionnées
 
+master
+

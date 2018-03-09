@@ -11,7 +11,7 @@ commitneeded (){
 # Si il existe un fichier qui n'a pas été fusionné renvoie vrai sinon renvoie faux
 unmergedfile (){
     status=$(git status)
-    result=$(echo "$status" | grep "both modified")
+    result=$(echo "$status" | grep "chemin")
     # Si result est une chaine non nulle renvoie vrai sinon faux
     [ -n "$result" ]
 }

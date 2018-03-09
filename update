@@ -11,7 +11,7 @@ commitneeded (){
 # affiche une chaine non nulle si des fichiers non pas été fusionnés, sinon ne renvoie rien
 unmergedfile (){
     status=$(git status)
-    echo "$status" | grep "both modified"
+    echo "$status" | grep "Chemins non fusionnés"
 }
 
 # commission de tous les changements apportés à la branche locales

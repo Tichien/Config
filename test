@@ -14,7 +14,7 @@ unmergedfile (){
     result=$(echo "$status" | grep "chemin")
     # Si result est une chaine non nulle renvoie vrai sinon faux
     [ -n "$result" ]
-}
+} 
 
 # Commission de tous les changements apportés à la branche locale
 commitall () {

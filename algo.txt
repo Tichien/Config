@@ -1,6 +1,6 @@
 git branch -a => list all branches
 git config --list => list config
-
 to diff => git fetch before
 
-origin
+git diff --name-only --diff-filter=U => renvoie les fichiers qui n'ont pas été fusionnées
+

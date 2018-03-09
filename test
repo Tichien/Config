@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 branch_is_late(){
 	result=$(git diff master origin)
 	[ -n "$result" ]

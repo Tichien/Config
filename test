@@ -1,5 +1,5 @@
 #!/bin/bash
-
+master
 if [[ "$#" < 1 ]]; then
 	COMMIT_MSG="Mise à jour du $(date)"
 else

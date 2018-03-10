@@ -2,6 +2,8 @@ git branch -a => list all branches
 git config --list => list config
 to diff => git fetch before
 
+origin
+
 git diff --name-only --diff-filter=U => renvoie les fichiers qui n'ont pas été fusionnées
 git diff master origin => renvoie les changements present sur master par rapport a la branche locale
 git diff => renvoie les changements presents sur la branche locale par rapport à master

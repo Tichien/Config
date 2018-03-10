@@ -7,3 +7,4 @@ git diff master origin => renvoie les changements present sur master par rapport
 git diff => renvoie les changements presents sur la branche locale par rapport à master
 
 
+master

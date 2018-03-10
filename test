@@ -94,7 +94,7 @@ if branch_is_late; then
 		echo ""
 		echo ""
 
-		read -r -p "Voulez-vous quitter pour résoudre le problème ? [y/n] " response
+		read -r -p "Voulez-vous quitter pour résoudre le problème manuellement ? [y/n] " response
 		echo ""
 
 		# Si la réponse est oui, on quitte le script
@@ -161,7 +161,8 @@ if branch_is_late; then
 
 			# Si il y des conflits on envoi un message d'avertissement
 			if unmergedfile; then
-				echo "Attention des conflits on été detectés !"
+				printf "${RED}Attention des conflits on été detectés !${NC}"
+				echo ""
 				echo "Veillez à bien resoudre les conflits avant la prochaine mise à jour"
 				echo ""
 			else

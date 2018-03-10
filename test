@@ -103,7 +103,7 @@ if branch_is_late; then
 		UNMERGED=$(git diff --name-only --diff-filter=U)
 
 		echo "Attention il y a des conflits dans les fichiers suivants:"
-		printf "${RED}$UNMERGED"
+		printf "${RED}$UNMERGED${NC}"
 		echo ""
 
 		read -r -p "Voulez-vous quitter pour résoudre les conflis ? " response
@@ -159,7 +159,7 @@ if branch_is_late; then
 		echo "La branche locale à du retard sur master, Une mise à jour est necessaire"
 		echo ""
 			
-		printf "${RED}$DIFFERENCES"
+		printf "${RED}$DIFFERENCES${NC}"
 		echo ""
 			
 		read -r -p "Voulez-vous vous mettre à jour la branche locale et obtenir les fichiers ci-dessus ? [y/n] " response

@@ -104,7 +104,7 @@ if branch_is_late; then
 			echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
 			exit
 		else
-			printf "${RED}Attention, répondez positivement seulement quand vous savez ce que vous faites !${NC}"
+			printf "${RED}Attention, répondez positivement seulement si vous savez ce que vous faites !${NC}"
 			echo ""
 			echo ""
 
@@ -164,6 +164,7 @@ if branch_is_late; then
 			# Si il y des conflits on envoi un message d'avertissement
 			if unmergedfile; then
 				printf "${RED}Attention des conflits on été detectés !${NC}"
+				echo ""
 				echo ""
 				echo "Veillez à bien resoudre les conflits avant la prochaine mise à jour"
 				echo ""

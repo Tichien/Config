@@ -102,21 +102,25 @@ if branch_is_late; then
 
 		UNMERGED=$(git diff --name-only --diff-filter=U)
 
-		echo "Attention il y a des conflits dans les fichiers suivants:"
+		echo "Attention il y a des conflits dans le(s) fichier(s) suivant(s) :"
+		echo ""
 		printf "${RED}$UNMERGED${NC}"
 		echo ""
+		echo ""
 
-		read -r -p "Voulez-vous quitter pour résoudre les conflis ? " response
+		read -r -p "Voulez-vous quitter pour résoudre les conflits ? [y/n] " response
 		echo ""
 
 		# Si la réponse est oui, on quitte le script
 		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+			echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
 			exit
 		else
-			echo "Attention ne répondez \"oui\" que si vous savez ce que vous faites !"
+			printf "${RED}Attention ne répondez \"oui\" que si vous savez ce que vous faites !${NC}"
+			echo ""
 			echo ""
 
-			read -r -p "Voulez-vous ecraser les fichiers de master avec les fichiers de la branche locale ? [y/n] " response
+			read -r -p "Voulez-vous resoudre le problème en ecrasant les fichiers de master avec les fichiers de la branche locale ? [y/n] " response
 			echo ""
 
 			# Si la réponse est oui, on envoi les données en ligne

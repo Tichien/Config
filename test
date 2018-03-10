@@ -6,9 +6,11 @@ else
 	COMMIT_MSG="$1"
 fi
 
-# A utiliser avec printf "${COLOR}"
+# Definition des variables et des fonctions
+
+# Couleur à utiliser (ex: printf "${COLOR}text${NC}")
 RED='\033[0;31m' # Red color
-NC='\033[0m' # No Color
+NC='\033[0m' # End color
 
 # Renvoie vrai si des changements ont étaient apportés à la branche master, renvoie faux sinon
 branch_is_late(){
@@ -22,7 +24,7 @@ branch_is_ahead(){
 	[ -n "$result" ]
 }
 
-# Renvoie vrai si il ya des conflits dans des fichiers de la branche locale, renvoie faux sinon
+# Renvoie vrai si des conflits ont empechés la fusion de certains fichiers de la branche locale avec master, renvoie faux sinon
 unmergedfile (){
 	result=$(git diff --name-only --diff-filter=U)
     # Si result est une chaine non nulle renvoie vrai sinon faux
@@ -90,7 +92,7 @@ if branch_is_late; then
 
 		echo "Attention les fichiers suivants n'ont pas été fusionnés :"
 		echo ""
-		printf "${RED}$UNMERGED${NC}"
+		printf "${RED}$UNMERGED${NC}" # Affiche les fichiers non fusionnées en rouge
 		echo ""
 		echo ""
 
@@ -102,7 +104,7 @@ if branch_is_late; then
 			echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
 			exit
 		else
-			printf "${RED}Attention ne répondez \"oui\" que si vous savez ce que vous faites !${NC}"
+			printf "${RED}Attention, répondez positivement seulement quand vous savez ce que vous faites !${NC}"
 			echo ""
 			echo ""
 
@@ -117,12 +119,12 @@ if branch_is_late; then
 				read -r -p "Dans ce cas voulez-vous ecraser les fichiers de la branche locale avec les fichiers de master ? [y/n] " response
 				echo ""
 			
-				# Si la réponse est oui, on demande une confirmation
+				# Si la réponse est oui, on affiche le status de la branche locale et on demande une confirmation
 				if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 					git status
 					echo ""
 
-					read -r -p "Attention les données qui n'ont pas été envoyées en ligne seront perdus continuer ? [y/n] " response
+					read -r -p "Attention les données qui n'ont pas été envoyées en ligne seront perdus, continuer ? [y/n] " response
 					echo ""
 				
 					# Si la réponse est oui, on réinitialise la branche locale à partir de master
@@ -152,7 +154,7 @@ if branch_is_late; then
 		echo ""
 		echo ""
 			
-		read -r -p "Voulez-vous vous mettre à jour la branche locale et fusionner les fichiers ci-dessus ? [y/n] " response
+		read -r -p "Voulez-vous mettre à jour la branche locale et fusionner les fichiers ci-dessus ? [y/n] " response
 		echo ""
 			
 		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then

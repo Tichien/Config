@@ -56,9 +56,10 @@ pullall () {
 	if [ -n "$conflict" ]; then
 		echo ""
 		echo "Des conflits on été detecté:"
-		echo "$conflict"
 		echo ""
-		echo "Attention à ne pas perdre de données à la prochaine mise à jour"
+		echo "${RED}$conflict${NC}"
+		echo ""
+		echo "Attention veuillez resoudre les conflits avant la prochaine mise à jour"
 	else
 		echo "$pull"
 	fi

@@ -161,6 +161,7 @@ if branch_is_late; then
 			
 		printf "${RED}$DIFFERENCES${NC}"
 		echo ""
+		echo ""
 			
 		read -r -p "Voulez-vous vous mettre à jour la branche locale et obtenir les fichiers ci-dessus ? [y/n] " response
 		echo ""

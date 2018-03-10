@@ -1,8 +1,13 @@
 #!/bin/bash
 
+if [[ "$#" < 1 ]]; then
+	COMMIT_MSG="Mise à jour du $(date)"
+else
+	COMMIT_MSG="$1"
+fi
+
 RED='\033[0;31m'
 NC='\033[0m' # No Color
-COMMIT_MSG="Mise à jour du $(date)"
 
 
 # Renvoie vrai si la branche locale a du retard sur master, renvoie faux sinon

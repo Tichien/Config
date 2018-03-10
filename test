@@ -80,7 +80,7 @@ fetchall () {
 	echo ""
 }
 
-# Début du script update:
+# Debut du script
 
 fetchall
 

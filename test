@@ -151,40 +151,6 @@ if branch_is_late; then
 			fi
 		fi
 	else
-		if branch_is_ahead; then
-			commitall
-		else
-			echo "-Aucune commission des données locale n'est à faire"
-			echo ""	
-		fi
-		
-		DIFFERENCES=$(git diff --name-status master origin)
-
-		echo "La branche locale à du retard sur master, Une mise à jour est necessaire"
-		echo ""
-			
-		printf "${RED}$DIFFERENCES${NC}"
-		echo ""
-		echo ""
-			
-		read -r -p "Voulez-vous vous mettre à jour la branche locale et obtenir les fichiers ci-dessus ? [y/n] " response
-		echo ""
-			
-		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-			
-			pullresult=$(pullall)
-			pullconflict=$(echo "$pullresult" | grep "CONFLICT")
-
-			echo "$pullresult"
-			echo ""
-
-			# si il n'y a pas de conflict on envoi les données en ligne
-			if [ -z "$pullconflict" ]; then
-				pushall
-			fi
-		else
-			echo "Mise à jour annulée"
-		fi
 	fi
 else
 	if branch_is_ahead; then

@@ -1,77 +1,166 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+COMMIT_MSG="Mise à jour du $(date)"
+
+
+# Renvoie vrai si la branche locale a du retard sur master, renvoie faux sinon
 branch_is_late(){
-	result=$(git diff master origin)
+	result=$(git diff --name-only master origin)
 	[ -n "$result" ]
 }
 
+# Renvoie vrai si des changements ont étaient apportés à la branche locale, renvoie faux sinon
 branch_is_ahead(){
-	result=$(git diff)
+	result=$(git diff --name-only)
 	[ -n "$result" ]
 }
 
-# Si un commit est necessaire renvoie vrai sinon faux
-commitneeded (){
-    status=$(git status)
-    result=$(echo "$status" | grep "git add")
-    # Si result est une chaine non nulle renvoie vrai sinon faux
-    [ -n "$result" ]
-}
-
-# Si il existe un fichier qui n'a pas été fusionné renvoie vrai sinon renvoie faux
+# Renvoie vrai si il ya des conflits dans des fichiers de la branche locale, renvoie faux sinon
 unmergedfile (){
 	result=$(git diff --name-only --diff-filter=U)
     # Si result est une chaine non nulle renvoie vrai sinon faux
     [ -n "$result" ]
-} 
+}
 
 # Commission de tous les changements apportés à la branche locale
 commitall () {
-    echo "-Commission des données locales..."
-    git add -A
-    git commit -m "Mise à jour"
-    echo "-Fait"
-    echo ""
+	echo "-Commission des données locales..."
+	git add -A
+	git commit -m "$COMMIT_MSG"
+	echo "-Fait"
+	echo ""
 }
 
 # Met en ligne les données locales mofifiées/ajoutées
 pushall () {
-    echo "-Mise en ligne des données locales..."
-    git push origin master
-    echo "-Fait"
-    echo ""
+	echo "-Mise en ligne des données locales..."
+	git push origin master
+	echo "-Fait"
+	echo ""
 }
 
 # Fusionne les données de la branche locale avec les données de master
 pullall () {
-    echo "-Fusion des données locales avec les données de master..."
-    
-    pull=$(git pull)
-    conflict=$(echo "$pull" | grep "CONFLICT")
+	echo "-Fusion des données locales avec les données de master..."
 
-    if [ -n "$conflict" ]
-    then
-    echo ""
-	echo "Des conflits on été detecté:"
-	echo "$conflict"
+	pull=$(git pull)
+	conflict=$(echo "$pull" | grep "CONFLICT")
+
+	if [ -n "$conflict" ]
+		then
+		echo ""
+		echo "Des conflits on été detecté:"
+		echo "$conflict"
+		echo ""
+		echo "Attention à ne pas perdre de données à la prochaine mise à jour"
+	else
+		echo "$pull"
+	fi
+
+	echo "-Fait"
 	echo ""
-	echo "Attention à ne pas perdre de données à la prochaine mise à jour"
-    else
-	echo "$pull"
-    fi
-    
-    echo "-Fait"
-    echo ""
 }
 
-if branch_is_late; then
-	echo "Je suis en retard"
-else
-	echo "Je ne suis pas en retard"
-fi
+# Va chercher tous les changements de toutes les branches en ligne
+# ce qui permettra de voir si il y a eu des add, delete, modification etc...
+# quite le script si la connexion est impossible
+fetchall () {
 
-if branch_is_ahead; then
-	echo "Je suis en avance"
+	echo "-Recherche des données en ligne..."
+
+	connexion=$(git fetch --all 2>&1)
+	failure=$(echo "$connexion" | grep "unable to access")
+
+	if [ -n "$failure" ]
+	then
+		echo "La connexion est impossible ou la remote n'existe pas"
+		echo ""
+		echo "$failure"
+		exit 1
+	else
+		echo "$connexion"
+	fi
+
+	echo "-Fait"
+	echo ""
+}
+
+# Début du script update:
+
+fetchall
+
+if branch_is_late; then
+
+	if unmergedfile; then
+
+		UNMERGED=$(git diff --name-only --diff-filter=U)
+
+		echo "Attention il y a des conflits dans les fichiers suivants:"
+		printf "$RED$UNMERGED"
+		echo ""
+
+		read -r -p "Voulez-vous quitter pour résoudre les conflis ? " response
+		echo ""
+
+		# Si la réponse est oui, on quitte le script
+		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+			exit
+		else
+			echo "Attention ne répondez \"oui\" que si vous savez ce que vous faites !"
+			echo ""
+
+			read -r -p "Voulez-vous ecraser les fichiers de master avec les fichiers de la branche locale ? [y/n] " response
+			echo ""
+
+			# Si la réponse est oui, on envoi les données en ligne
+			if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+				commitall
+				pushall
+			else
+				read -r -p "Dans ce cas voulez-vous ecraser les fichiers de la branche locale avec les fichiers de master ? [y/n] " response
+				echo ""
+			
+				# Si la réponse est oui, on demande une confirmation
+				if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+					git status
+					echo ""
+
+					read -r -p "Attention les données qui n'ont pas été envoyées en ligne seront perdus continuer ? [y/n] " response
+					echo ""
+				
+					# Si la réponse est oui, on réinitialise la branche locale à partir de master
+					if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+						git reset --hard origin/master
+					else
+						echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
+					fi
+				else
+					echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
+				fi
+			fi
+		fi
+	fi
 else
-	echo "Je ne suis pas en avence"
+	if branch_is_ahead; then
+
+		echo "-Aquisition du status de la branche locale..."
+		git status
+		echo "-Fait"
+		echo ""
+
+		read -r -p "Mettre à jour master à partir de cette branche ? [y/n] " response
+		echo ""
+		
+		# Si la reponse est oui, on envoi les données en ligne
+		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+			commitall
+			pushall
+		else
+			echo "Mise à jour de master annulée"
+		fi
+	else
+		echo "Cette branche est identique à master, la mise à jour est inutile"
+	fi
 fi

@@ -50,19 +50,20 @@ pushall () {
 pullall () {
 	echo "-Fusion des données locales avec les données de master..."
 
-	pull=$(git pull)
-	conflict=$(echo "$pull" | grep "CONFLICT")
+	git pull 
+	#pull=$(git pull)
+	#conflict=$(echo "$pull" | grep "CONFLICT")
 
-	if [ -n "$conflict" ]; then
-		echo ""
-		echo "Des conflits on été detecté:"
-		echo ""
-		echo "${RED}$conflict${NC}"
-		echo ""
-		echo "Attention veuillez resoudre les conflits avant la prochaine mise à jour"
-	else
-		echo "$pull"
-	fi
+	#if [ -n "$conflict" ]; then
+	#	echo ""
+	#	echo "Des conflits on été detecté:"
+	#	echo ""
+	#	echo "${RED}$conflict${NC}"
+	#	echo ""
+	#	echo "Attention veuillez resoudre les conflits avant la prochaine mise à jour"
+	#else
+	#	echo "$pull"
+	#fi
 
 	echo "-Fait"
 	echo ""
@@ -172,16 +173,27 @@ if branch_is_late; then
 			
 		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 			
-			pullresult=$(pullall)
-			pullconflict=$(echo "$pullresult" | grep "CONFLICT")
+			pullall
 
-			echo "$pullresult"
-			echo ""
-
-			# si il n'y a pas de conflict on envoi les données en ligne
-			if [ -z "$pullconflict" ]; then
+			# Si il y des conflict on envoi un message
+			if unmergedfile; then
+				echo "Attention des conflits on été detectés"
+				echo "Veuillez resoudre les conflits avant la prochaine mise à jour"
+				echo ""
+			else
 				pushall
 			fi
+
+			#pullresult=$(pullall)
+			#pullconflict=$(echo "$pullresult" | grep "CONFLICT")
+
+			#echo "$pullresult"
+			#echo ""
+
+			# si il n'y a pas de conflict on envoi les données en ligne
+			#if [ -z "$pullconflict" ]; then
+			#	pushall
+			#fi
 		else
 			echo "Mise à jour annulée"
 		fi

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+test() {
+	false	
+}
+
+if ! ((test)); then
+	echo "non test"
+else
+	echo "text"
+fi

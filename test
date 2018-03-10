@@ -53,8 +53,7 @@ pullall () {
 	pull=$(git pull)
 	conflict=$(echo "$pull" | grep "CONFLICT")
 
-	if [ -n "$conflict" ]
-		then
+	if [ -n "$conflict" ]; then
 		echo ""
 		echo "Des conflits on été detecté:"
 		echo "$conflict"

@@ -100,6 +100,16 @@ pushall () {
 	git push origin master
 	echo "-Fait"
 	echo ""
+
+	if unpushedfile; then
+		printf "${RED}Attention la mise en ligne des données a echouée${NC}"
+		echo ""
+		echo ""
+		exit 1
+	fi
+
+	echo "Mise en ligne des données reussi !"
+	echo ""
 }
 
 # Fusionne les données de la branche locale avec les données de master
@@ -154,13 +164,6 @@ if unpushedfile; then
 		echo "Mise à jour annulée !"
 		exit 0
 	fi
-
-	if unpushedfile; then
-		echo "La mise en ligne des données a échoué !"
-		exit 0
-	fi
-	echo "La mise en ligne des données reussi !"
-	echo ""
 fi
 
 if branch_is_late; then

@@ -8,4 +8,4 @@ git diff => renvoie les changements presents sur la branche locale par rapport Ã
 
 before add => notstagged
 before commit => notcommited
-before pushed =>
+before pushed => 

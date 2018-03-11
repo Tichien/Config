@@ -68,6 +68,12 @@ unmergedfile (){
     [ -n "$result" ]
 }
 
+unpushedfile (){
+	result=$(git log origin/master..HEAD)
+
+	[ -n "$result" ]
+}
+
 # Commission de tous les changements apportés à la branche locale
 commitall () {
 	git add -A
@@ -131,6 +137,29 @@ fetchall () {
 # Debut du script:
 
 fetchall
+
+if unpushedfile; then
+	echo "Attention des commits n'onts pas été mis en ligne, or cela est necessaire pour la mise à jour !"
+	echo ""
+
+	git log origin/master..HEAD
+	echo ""
+
+	read -r -p "Voulez-vous mettre en ligne ces commits ? [y/n] " response
+	echo ""
+
+	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+		pushall
+	else
+		echo "Mise à jour annulée !"
+		exit 0
+	fi
+
+	if unpushedfile; then
+		echo "La mise en ligne des commits a échoué !"
+		exit 0
+	fi
+fi
 
 if branch_is_late; then
 

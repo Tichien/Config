@@ -8,12 +8,10 @@
 # Si la branche locale a de l'avance par rapport à master alors
 # les données de la branche locale sont mise en ligne vers master
 # 
-# Si il y a des fichiers non fusionnées dans la branche locale alors
-# le scripts propose des moyens pour regler les problèmes
+# Si il y a des fichiers non fusionnés dans la branche locale alors
+# le script propose des moyens pour regler les problèmes
 
-if [[ "$#" < 1 ]]; then
-	COMMIT_MSG="Mise à jour du $(date)"
-else
+if [[ "$#" >= 1 ]]; then
 	COMMIT_MSG="$1"
 fi
 
@@ -46,6 +44,12 @@ unmergedfile (){
 commitall () {
 	echo "-Commission des données locales..."
 	git add -A
+	read -p "Commit message : " COMMIT_MSG
+
+	if [ -z "$COMMIT_MSG" ]; then
+		COMMIT_MSG="Mise à jour du $(date)"
+	fi
+
 	git commit -m "$COMMIT_MSG"
 	echo "-Fait"
 	echo ""

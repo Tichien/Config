@@ -42,7 +42,6 @@ unmergedfile (){
 
 # Commission de tous les changements apportés à la branche locale
 commitall () {
-	echo "-Commission des données locales..."
 	git add -A
 	
 	read -p "Commit message : " COMMIT_MSG
@@ -50,7 +49,8 @@ commitall () {
 	if [ -z "$COMMIT_MSG" ]; then
 		COMMIT_MSG="Mise à jour du $(date)"
 	fi
-
+	
+	echo "-Commission des données locales..."
 	git commit -m "$COMMIT_MSG"
 	echo "-Fait"
 	echo ""

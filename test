@@ -11,9 +11,9 @@
 # Si il y a des fichiers non fusionnés dans la branche locale alors
 # le script propose des moyens pour regler les problèmes
 
-if [[ "$#" >= 1 ]]; then
-	COMMIT_MSG="$1"
-fi
+#if [[ "$#" >= 1 ]]; then
+#	COMMIT_MSG="$1"
+#fi
 
 # Definition des variables et des fonctions
 
@@ -44,6 +44,7 @@ unmergedfile (){
 commitall () {
 	echo "-Commission des données locales..."
 	git add -A
+	
 	read -p "Commit message : " COMMIT_MSG
 
 	if [ -z "$COMMIT_MSG" ]; then

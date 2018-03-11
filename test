@@ -46,11 +46,14 @@ unmergedfile (){
 commitall () {
 	git add -A
 	
-	read -p "Veuillez décrire les changements apportés : " COMMIT_MSG
-	echo ""
-
 	if [ -z "$COMMIT_MSG" ]; then
-		COMMIT_MSG="Mise à jour du $(date)"
+
+		read -p "Veuillez décrire les changements apportés : " COMMIT_MSG
+		echo ""
+
+		if [ -z "$COMMIT_MSG" ]; then
+			COMMIT_MSG="Mise à jour du $(date)"
+		fi
 	fi
 
 	echo "-Commission des données locales..."

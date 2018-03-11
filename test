@@ -11,9 +11,9 @@
 # Si il y a des fichiers non fusionnés dans la branche locale alors
 # le script propose des moyens pour regler les problèmes
 
-#if [[ "$#" >= 1 ]]; then
-#	COMMIT_MSG="$1"
-#fi
+if [[ "$#" -gt 0 ]]; then
+	COMMIT_MSG="$1"
+fi
 
 # Definition de variables et de fonctions:
 

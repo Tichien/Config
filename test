@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Ce script a pour but de mettre à jour la branche locale
+# 
+# Si la branche locale a du retard par rapport à master alors
+# les données de la branche locale et de master sont fusionnées
+# 
+# Si la branche locale a de l'avance par rapport à master alors
+# les données de la branche locale sont mise en ligne vers master
+# 
+# Si il y a des fichiers non fusionnées dans la branche locale alors
+# le scripts propose des moyens pour regler les problèmes
+
 if [[ "$#" < 1 ]]; then
 	COMMIT_MSG="Mise à jour du $(date)"
 else

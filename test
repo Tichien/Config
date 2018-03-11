@@ -1,19 +1,47 @@
 #!/bin/bash
 
-# Ce script a pour but de mettre à jour la branche locale
-# 
-# Si la branche locale a du retard par rapport à master alors
-# les données de la branche locale et de master sont fusionnées
-# 
-# Si la branche locale a de l'avance par rapport à master alors
-# les données de la branche locale sont mise en ligne vers master
-# 
-# Si il y a des fichiers non fusionnés dans la branche locale alors
-# le script propose des moyens pour regler les problèmes
+$GET_MESSAGE=false
 
-if [ $# -gt 0 ]; then
-	COMMIT_MSG="$1"
-fi
+for arg in "$@"; do
+	if [ "$arg" = "--help" ]; then
+		
+		echo "USAGE:"
+		echo ""
+		echo "$0 [OPTIONS]..."
+		echo ""
+		echo "DESCRIPTION:"
+		echo ""
+		echo "Ce script a pour but de mettre à jour la branche locale"
+		echo ""
+		echo "Si la branche locale a du retard par rapport à master alors"
+		echo "les données de la branche locale et de master seront fusionnées"
+		echo ""
+		echo "Si la branche locale a de l'avance par rapport à master alors"
+		echo "les données de la branche locale seront mises en ligne vers master"
+		echo ""
+		echo "Si il y a des fichiers non fusionnés dans la branche locale alors"
+		echo "le script proposera des moyens pour regler les problèmes"
+		echo ""
+		echo "OPTIONS:"
+		echo ""
+		echo "    --help => affiche l'aide du script"
+		echo "    -m <message> => Le message sera envoyées au prochain commit"
+		exit 0
+
+	elif [ "$arg" = "-m"]; then
+
+		GET_MESSAGE=true
+
+	elif [ "$GET_MESSAGE" = true ]; then
+
+		GET_MESSAGE=false
+		COMMIT_MSG="$arg"
+	fi
+done
+
+#if [ $# -gt 0 ]; then
+#	COMMIT_MSG="$1"
+#fi
 
 # Definition de variables et de fonctions:
 

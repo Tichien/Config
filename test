@@ -45,11 +45,12 @@ commitall () {
 	git add -A
 	
 	read -p "Commit message : " COMMIT_MSG
-
+	echo ""
+	
 	if [ -z "$COMMIT_MSG" ]; then
 		COMMIT_MSG="Mise à jour du $(date)"
 	fi
-	
+
 	echo "-Commission des données locales..."
 	git commit -m "$COMMIT_MSG"
 	echo "-Fait"

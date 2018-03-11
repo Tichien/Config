@@ -102,8 +102,7 @@ pushall () {
 	echo ""
 
 	if unpushedfile; then
-		printf "${RED}Attention la mise en ligne des données a echouée${NC}"
-		echo ""
+		printf "${RED}Mise en ligne des données echouée${NC}"
 		echo ""
 		exit 1
 	fi
@@ -164,6 +163,8 @@ if unpushedfile; then
 		echo "Mise à jour annulée !"
 		exit 0
 	fi
+	echo "Mise à jour en cours..."
+	echo ""
 fi
 
 if branch_is_late; then

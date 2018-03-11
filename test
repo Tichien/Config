@@ -15,28 +15,30 @@
 #	COMMIT_MSG="$1"
 #fi
 
-# Definition des variables et des fonctions
+# Definition de variables et de fonctions:
 
-# Couleur à utiliser (ex: printf "${COLOR}text${NC}")
+# Couleur à utiliser (ex: printf "${COLOR}text${NC}" => affiche "text" en rouge)
 RED='\033[0;31m' # Red color
-NC='\033[0m' # End color
+NC='\033[0m' # Normal color
 
 # Renvoie vrai si des changements ont étaient apportés à la branche master, renvoie faux sinon
 branch_is_late(){
 	result=$(git diff --name-only master origin)
+	# Test si result est une chaine non nulle
 	[ -n "$result" ]
 }
 
 # Renvoie vrai si des changements ont étaient apportés à la branche locale, renvoie faux sinon
 branch_is_ahead(){
 	result=$(git diff --name-only)
+	# Test si result est une chaine non nulle
 	[ -n "$result" ]
 }
 
 # Renvoie vrai si des conflits ont empechés la fusion de certains fichiers de la branche locale avec master, renvoie faux sinon
 unmergedfile (){
 	result=$(git diff --name-only --diff-filter=U)
-    # Si result est une chaine non nulle renvoie vrai sinon faux
+    # Test si result est une chaine non nulle
     [ -n "$result" ]
 }
 
@@ -44,9 +46,9 @@ unmergedfile (){
 commitall () {
 	git add -A
 	
-	read -p "Commit message : " COMMIT_MSG
+	read -p "Veuillez décrire les changements apportés : " COMMIT_MSG
 	echo ""
-	
+
 	if [ -z "$COMMIT_MSG" ]; then
 		COMMIT_MSG="Mise à jour du $(date)"
 	fi
@@ -97,7 +99,7 @@ fetchall () {
 	echo ""
 }
 
-# Debut du script
+# Debut du script:
 
 fetchall
 

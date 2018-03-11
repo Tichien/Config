@@ -3,6 +3,7 @@
 SET_MSG=false
 
 # modification d'origin 2
+# fjdsqf
 
 for arg in "$@"; do
 	if [ "$arg" = "--help" ]; then

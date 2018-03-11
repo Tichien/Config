@@ -139,13 +139,13 @@ fetchall () {
 fetchall
 
 if unpushedfile; then
-	echo "Attention des commits n'onts pas été mis en ligne, or cela est necessaire pour la mise à jour !"
+	echo "Attention des données n'ont pas été mises en ligne, cela est necessaire pour la mise à jour !"
 	echo ""
 
 	git log origin/master..HEAD
 	echo ""
 
-	read -r -p "Voulez-vous mettre en ligne ces commits ? [y/n] " response
+	read -r -p "Voulez-vous mettre en ligne ces données ? [y/n] " response
 	echo ""
 
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
@@ -156,9 +156,11 @@ if unpushedfile; then
 	fi
 
 	if unpushedfile; then
-		echo "La mise en ligne des commits a échoué !"
+		echo "La mise en ligne des données a échoué !"
 		exit 0
 	fi
+	echo "La mise en ligne des données reussi !"
+	echo ""
 fi
 
 if branch_is_late; then
@@ -271,6 +273,6 @@ else
 			echo "Mise à jour de master annulée"
 		fi
 	else
-		echo "Cette branche est identique à master, la mise à jour est inutile"
+		echo "Cette branche est identique à master, la mise à jour est terminée"
 	fi
 fi

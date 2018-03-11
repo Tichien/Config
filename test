@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GET_MESSAGE=false
+SET_MSG=false
 
 for arg in "$@"; do
 	if [ "$arg" = "--help" ]; then
@@ -30,18 +30,14 @@ for arg in "$@"; do
 
 	elif [ "$arg" = "-m" ]; then
 
-		GET_MESSAGE=true
+		SET_MSG=true
 
-	elif [ "$GET_MESSAGE" = true ] && [ -n "$arg" ]; then
+	elif [ "$SET_MSG" = true ] && [ -n "$arg" ]; then
 
-		GET_MESSAGE=false
+		SET_MSG=false
 		COMMIT_MSG="$arg"
 	fi
 done
-
-#if [ $# -gt 0 ]; then
-#	COMMIT_MSG="$1"
-#fi
 
 # Definition de variables et de fonctions:
 

@@ -78,9 +78,9 @@ has_diverged() {
 }
 
 # Recupère les changements apportés à la branche distante, et quitte le programme si aucune connexion n'est possible
-fetchall() {
+fetch() {
 
-	echo "Recherche des données en ligne..."
+	echo "Recupèration des données en ligne..."
 
 	connexion=$(git fetch --all 2>&1)
 	failure=$(echo "$connexion" | grep "unable to access")
@@ -98,11 +98,18 @@ fetchall() {
 	echo ""
 }
 
+get_status() {
+	echo "Aquisition du status..."
+	git status -sb
+	echo ""
+}
+
 # Ajoute tous les fichiers qui ne le sont pas, dans l'index "staged", puis envoie un commit avec le message passé en paramètre.
 # Si aucun message n'est entré en paramètre alors le commit enverra la date et l'heure en message. 
 send_changes() {
 
 	read -r -p "Soumettre les changements ? [y/n] " response
+	echo ""
 
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 		
@@ -114,13 +121,14 @@ send_changes() {
 			COMMIT_MSG="Mise à jour du $(date)"
 		else
 			read -p "Quels sont les changements ? : " COMMIT_MSG
+			echo ""
 		fi
 
 		git commit -m "$COMMIT_MSG"
 		echo ""
 
 	else
-		echo "Aucun changement n'a été soumis, utilisez git add/commit/push pour le faire manuellement"
+		echo "Aucun changements n'a été soumis"
 		exit 0
 	fi
 }
@@ -176,10 +184,9 @@ resolve_conflicts() {
 	fi
 }
 
-fetchall
+fetch
 
-git status -sb
-echo ""
+get_status
 
 if has_diverged; then
 	resolve_conflicts

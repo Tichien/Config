@@ -24,5 +24,11 @@ exist_unpushed
 	git log origin/master..HEAD)
 
 
-si branch
-
+si is_behind alors
+	
+sinon 
+	si exist_unstaged alors
+		git add --all
+	si exist_uncommited alors
+		commit -m msg
+	

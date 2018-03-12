@@ -34,6 +34,27 @@ is_behind
 
 fetchall
 
+check_diverged:
+si has_diverged alors
+	
+	resoudre a la main ? [y/n]
+
+	si oui alors
+		exit
+	sinon
+		ecrasé master ? [y/n]
+
+		si oui alors
+			pushall
+		sinon
+			dans ce cas fusionner master origin ? [y/n]
+
+			si oui alors
+				git reset --hard
+			sinon
+				mise à jour annulé
+				exit
+
 si has_changed alors
 	git status -sb
 
@@ -49,6 +70,8 @@ si has_changed alors
 	sinon 
 		mise à jour annulé
 		exit
+
+
 
 check_behind:
 si is_behind alors
@@ -66,26 +89,7 @@ si is_behind alors
 		la fusion n'a pas eu lieux
 		exit
 
-	check_diverged:
-	si has_diverged alors
-		
-		resoudre a la main ? [y/n]
-
-		si oui alors
-			exit
-		sinon
-			ecrasé master ? [y/n]
-
-			si oui alors
-				pushall
-			sinon
-				dans ce cas fusionner master origin ? [y/n]
-
-				si oui alors
-					git reset --hard
-				sinon
-					mise à jour annulé
-					exit
+	check_diverged
 
 check_ahead:
 si is_ahead alors

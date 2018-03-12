@@ -113,9 +113,7 @@ send_changes() {
 			COMMIT_MSG="Mise à jour du $(date)"
 		else
 			read -p "Quels sont les changements ? : " COMMIT_MSG
-			echo ""
 		fi
-
 
 		git commit -m "$COMMIT_MSG"
 		echo ""
@@ -224,7 +222,9 @@ if is_behind; then
 fi
 
 if is_ahead; then
+	
 	git push origin master
+	echo ""
 
 	if exist_unpushed; then
 		echo -e "${RED}Mise en ligne des données echouée !${NC}"

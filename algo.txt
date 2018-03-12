@@ -71,15 +71,9 @@ si has_changed alors
 		mise à jour annulé
 		exit
 
-
-
+ 
 check_behind:
 si is_behind alors
-
-	si exist_unstaged alors
-		git add --all
-	si exist_uncommited alors
-		commit -m msg
 
 	fusionner ? [y/n] 
 

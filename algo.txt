@@ -25,6 +25,12 @@ exist_unpushed
 
 fetchall
 
+is_ahead:
+	git log origin/master..HEAD --oneline
+
+is_behind
+	git log HEAD..origin/master --oneline
+
 check_diverged:
 si has_diverged alors
 	

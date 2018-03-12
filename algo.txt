@@ -66,6 +66,9 @@ si is_behind alors
 		git	pull
 	sinon
 		la fusion n'a pas eu lieux
+		exit
+
+	check_diverged
 
 check_ahead:
 si is_ahead alors
@@ -81,6 +84,3 @@ si is_ahead alors
 	sinon
 		mise à jour annulé
 
-
-origin
-origin2

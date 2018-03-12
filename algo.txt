@@ -36,6 +36,8 @@ is_behind
 
 fetchall
 
+git status -sb
+
 resolve_conflicts:
 si has_diverged alors
 	
@@ -60,8 +62,6 @@ si has_diverged alors
 send_changes:
 si exist_unstagged || exist_uncommit alors
 	
-	git status -sb
-
 	Soumettre les changements ? [y/n]
 
 	si oui alors

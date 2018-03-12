@@ -10,3 +10,23 @@ before add => notstagged
 before commit => notcommited
 before pushed => unpushed
 
+list files currently changed
+
+git diff --name-only
+
+list files added to the index "staged"
+
+git diff --name-only --cached
+
+
+exist_unstaged
+	git diff --name-only
+
+exist_uncommitted
+	git diff --name-only --cached
+
+exist_unpushed
+	git log origin/master..HEAD)
+
+
+si branch

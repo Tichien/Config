@@ -222,6 +222,8 @@ if branch_is_late; then
 		fi
 	else
 		if branch_is_ahead; then
+			git status
+			echo ""
 			commitall
 		else
 			echo "-Aucune commission de données locale n'est à faire"

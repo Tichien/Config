@@ -152,7 +152,7 @@ if unpushedfile; then
 
 	UNPUSHED_LOG=$(git log origin/master..HEAD)
 
-	echo "$UNPUSHED_LOG"
+	echo -e "$UNPUSHED_LOG"
 	echo ""
 
 	read -r -p "Voulez-vous mettre en ligne ces données ? [y/n] " response

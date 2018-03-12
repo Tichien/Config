@@ -24,7 +24,12 @@ exist_unpushed
 	git log origin/master..HEAD)
 
 
-si is_behind alors
+
+
+si has_diverged alors
+	truc
+
+sinon si is_behind alors
 	
 sinon 
 	si exist_unstaged alors
@@ -32,3 +37,4 @@ sinon
 	si exist_uncommited alors
 		commit -m msg
 	
+

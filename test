@@ -101,13 +101,12 @@ pushall () {
 	echo ""
 
 	if unpushedfile; then
-		printf "${RED}Mise en ligne des données echouée${NC}"
+		printf "$(RED)Mise en ligne des données echouée$(NC)"
 		echo ""
 		exit 1
 	fi
 
-	printf "${GREEN}Mise en ligne des données reussi !${NC}"
-	echo ""
+	echo -e "$(GREEN)Mise en ligne des données reussi !$(NC)"
 	echo ""
 }
 

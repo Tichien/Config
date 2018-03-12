@@ -150,7 +150,9 @@ if unpushedfile; then
 	echo "Attention des données n'ont pas été mises en ligne, cela est necessaire pour la mise à jour !"
 	echo ""
 
-	git log origin/master..HEAD
+	UNPUSHED_LOG=$(git log origin/master..HEAD)
+
+	echo "$UNPUSHED_LOG"
 	echo ""
 
 	read -r -p "Voulez-vous mettre en ligne ces données ? [y/n] " response
@@ -162,8 +164,6 @@ if unpushedfile; then
 		echo "Mise à jour annulée !"
 		exit 0
 	fi
-	echo "Poursuite de la mise à jour..."
-	echo ""
 fi
 
 if branch_is_late; then
@@ -224,7 +224,7 @@ if branch_is_late; then
 		if branch_is_ahead; then
 			commitall
 		else
-			echo "-Aucune commission des données locale n'est à faire"
+			echo "-Aucune commission de données locale n'est à faire"
 			echo ""	
 		fi
 		
@@ -236,7 +236,7 @@ if branch_is_late; then
 		echo ""
 		echo ""
 			
-		read -r -p "Voulez-vous mettre à jour la branche locale et fusionner les fichiers ci-dessus ? [y/n] " response
+		read -r -p "Voulez-vous mettre à jour la branche locale en fusionnant les fichiers ci-dessus ? [y/n] " response
 		echo ""
 			
 		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then

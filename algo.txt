@@ -27,9 +27,38 @@ exist_unpushed
 
 
 si has_diverged alors
-	truc
+	
+	resoudre a la main ? [y/n]
 
-sinon si is_behind alors
+	si oui alors
+		exit
+	sinon
+		ecrasé master ? [y/n]
+
+		si oui alors
+			pushall
+		sinon
+			dans ce cas fusionner master origin ? [y/n]
+
+			si oui alors
+				git reset --hard
+			sinon
+				mise à jour annulé
+				exit
+
+si is_behind alors
+
+	si exist_unstaged alors
+		git add --all
+	si exist_uncommited alors
+		commit -m msg
+
+	fusionner ? [y/n] 
+
+	if oui alors
+		git	pull
+	sinon
+		la fusion n'a pas eu lieux
 	
 sinon 
 	si exist_unstaged alors

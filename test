@@ -186,7 +186,7 @@ if branch_is_late; then
 		# Si la réponse est oui, on quitte le script
 		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 			echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
-			exit
+			exit 0
 		else
 			echo -e "${RED}Attention, répondez positivement seulement si vous savez ce que vous faites !${NC}"
 			echo ""

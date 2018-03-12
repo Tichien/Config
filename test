@@ -2,8 +2,6 @@
 
 SET_MSG=false
 
-# master
-
 for arg in "$@"; do
 	if [ "$arg" = "--help" ]; then
 		

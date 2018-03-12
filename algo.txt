@@ -59,11 +59,19 @@ si is_behind alors
 		git	pull
 	sinon
 		la fusion n'a pas eu lieux
+
+si is_ahead alors
 	
-sinon 
-	si exist_unstaged alors
-		git add --all
-	si exist_uncommited alors
-		commit -m msg
+	git status
+
+	mettre a jour ? [y/n]
+
+	si oui alors
+		git add 
+		git commit
+		git push
+	sinon
+		mise à jour annulé
+
 	
 

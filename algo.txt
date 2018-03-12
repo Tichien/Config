@@ -11,3 +11,4 @@ before commit => notcommited
 before pushed => 
 
 origin
+master

@@ -44,6 +44,7 @@ done
 # Couleur à utiliser (ex: printf "${COLOR}text${NC}" => affiche "text" en rouge)
 RED='\033[0;31m' # Red color
 GREEN='\033[0;32m' # Green color
+BLUE='\033[0;34m' # Blue color
 NC='\033[0m' # Normal color
 
 # Renvoie vrai si la branche locale a du retard sur master, renvoie faux sinon
@@ -130,15 +131,15 @@ resolve_conflicts() {
 	echo -e "${RED}Attention, des fichiers n'ont pas été fusionnés !${NC}"
 	echo ""
 
-	read -r -p "Voulez-vous quitter pour résoudre les conflits manuellement ? [y/n] " response
+	read -r -p "Voulez-vous quitter et résoudre les conflits manuellement ? [y/n] " response
 	echo ""
 
 	# Si la réponse est oui, on quitte le script
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-		echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
+		echo "Utilisez git add, git commit et git push pour resoudre les conflits"
 		exit 0
 	else
-		echo -e "${RED}Attention, répondez positivement seulement si vous savez ce que vous faites !${NC}"
+		echo -e "${BLUE}Ne validez que quand vous savez ce que vous faites${NC}"
 		echo ""
 
 		read -r -p "Envoyer les données telles qu'elles en ligne ? [y/n] " response
@@ -164,11 +165,11 @@ resolve_conflicts() {
 				if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 					git reset --hard origin/master
 				else
-					echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
+					echo "Utilisez git add, git commit et git push pour resoudre les conflits"
 					exit 0
 				fi
 			else
-				echo "Aucun changement n'a été effectué, vous pouvez modifier les fichiers un par un puis envoyer les changements à master avec git add, git commit, git push"
+				echo "Utilisez git add, git commit et git push pour resoudre les conflits"
 				exit 0
 			fi
 		fi
@@ -198,6 +199,7 @@ if is_behind; then
 		
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 		git pull
+		echo ""
 	else
 		echo "Les branches n'ont pas été fusionnées"
 		exit 0

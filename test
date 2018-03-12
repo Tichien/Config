@@ -46,6 +46,9 @@ RED='\033[0;31m' # Red color
 GREEN='\033[0;32m' # Green color
 NC='\033[0m' # Normal color
 
+
+
+
 # Renvoie vrai si des changements ont étaient apportés à la branche master, renvoie faux sinon
 branch_is_late(){
 	result=$(git diff --name-only master origin)

@@ -49,7 +49,7 @@ si has_diverged alors
 		ecrasé master ? [y/n]
 
 		si oui alors
-			pushall
+			send_changes
 		sinon
 			dans ce cas fusionner master origin ? [y/n]
 

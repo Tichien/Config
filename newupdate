@@ -214,6 +214,8 @@ if is_behind; then
 
 	if has_diverged; then
 		resolve_conflicts
+	else
+		echo -e "${GREEN}Fusion des données reussi !${NC}"
 	fi
 fi
 

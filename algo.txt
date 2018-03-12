@@ -23,9 +23,9 @@ exist_uncommitted
 exist_unpushed
 	git log origin/master..HEAD)
 
+fetchall
 
-
-
+check_diverged:
 si has_diverged alors
 	
 	resoudre a la main ? [y/n]
@@ -46,6 +46,7 @@ si has_diverged alors
 				mise à jour annulé
 				exit
 
+check_behind:
 si is_behind alors
 
 	si exist_unstaged alors
@@ -60,6 +61,7 @@ si is_behind alors
 	sinon
 		la fusion n'a pas eu lieux
 
+check_ahead:
 si is_ahead alors
 	
 	git status
@@ -73,6 +75,4 @@ si is_ahead alors
 	sinon
 		mise à jour annulé
 
-	
 
-origin

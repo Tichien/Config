@@ -2,8 +2,6 @@
 
 SET_MSG=false
 
-# modification d'origin 2
-# 
 for arg in "$@"; do
 	if [ "$arg" = "--help" ]; then
 		
@@ -45,6 +43,7 @@ done
 
 # Couleur à utiliser (ex: printf "${COLOR}text${NC}" => affiche "text" en rouge)
 RED='\033[0;31m' # Red color
+GREEN='\033[0;32m' # Green color
 NC='\033[0m' # Normal color
 
 # Renvoie vrai si des changements ont étaient apportés à la branche master, renvoie faux sinon
@@ -70,7 +69,7 @@ unmergedfile (){
 
 unpushedfile (){
 	result=$(git log origin/master..HEAD)
-
+    # Test si result est une chaine non nulle
 	[ -n "$result" ]
 }
 
@@ -107,7 +106,8 @@ pushall () {
 		exit 1
 	fi
 
-	echo "Mise en ligne des données reussi !"
+	printf "${GREEN}Mise en ligne des données reussi !${NC}"
+	echo ""
 	echo ""
 }
 
@@ -163,7 +163,7 @@ if unpushedfile; then
 		echo "Mise à jour annulée !"
 		exit 0
 	fi
-	echo "Mise à jour en cours..."
+	echo "Poursuite de la mise à jour..."
 	echo ""
 fi
 

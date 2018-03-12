@@ -190,9 +190,7 @@ fi
 
 if is_behind; then
 
-	DIFFERENCES=$(git diff --name-status master origin)
-
-	echo -e "${RED}$DIFFERENCES${NC}"
+	git diff --name-status --color master origin | cat
 	echo ""
 		
 	read -r -p "La branche locale et la branche distante ont divergé, fusionner les deux branches ? [y/n] " response
@@ -222,7 +220,7 @@ if is_behind; then
 fi
 
 if is_ahead; then
-	
+
 	git push origin master
 	echo ""
 

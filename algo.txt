@@ -10,3 +10,4 @@ before add => notstagged
 before commit => notcommited
 before pushed => unpushed
 
+master

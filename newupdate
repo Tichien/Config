@@ -80,7 +80,7 @@ has_diverged() {
 # Recupère les changements apportés à la branche distante, et quitte le programme si aucune connexion n'est possible
 fetch() {
 
-	echo "Recupèration des données en ligne..."
+	echo "Recupération des données en ligne..."
 
 	connexion=$(git fetch --all 2>&1)
 	failure=$(echo "$connexion" | grep "unable to access")

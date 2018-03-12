@@ -32,9 +32,11 @@ is_behind
 	git log HEAD..origin/master --oneline
 
 
+
+
 fetchall
 
-check_diverged:
+resolve_conflicts:
 si has_diverged alors
 	
 	resoudre a la main ? [y/n]
@@ -55,39 +57,38 @@ si has_diverged alors
 				mise à jour annulé
 				exit
 
-si has_changed alors
+send_changes:
+si exist_unstagged || exist_uncommit alors
+	
 	git status -sb
 
-	Soummettre les changements ? [y/n]
-
-	if exist_unstaged alors
-		git add -A
+	Soumettre les changements ? [y/n]
 
 	si oui alors
-		if exist_uncommitted alors
-			ecrire une descriptions des changements : 
-			commit -m description
+		git add -A
+
+		si !msg
+			ecrire une descriptions des changements : -> msg 
+		
+		commit -m msg
 	sinon 
 		mise à jour annulé
 		exit
 
  
-check_behind:
 si is_behind alors
 
-	fusionner ? [y/n] 
+	La branche locale et la branche distante ont divergé, fusionner les deux branches ? [y/n] 
 
 	if oui alors
 		git	pull
 	sinon
 		la fusion n'a pas eu lieux
 		exit
-
-	check_diverged
-
-check_ahead:
-si is_ahead alors
 	
-	git push origin master
+	si has_diverged
+		resolve_conflicts
 
-origin
+
+si is_ahead alors
+	git push origin master

@@ -197,18 +197,7 @@ if is_behind; then
 	echo ""
 		
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-		
-		pullall
-
-		# Si il y des conflits on envoi un message d'avertissement
-		if unmergedfile; then
-			echo -e "${RED}Attention des conflits on été detectés !${NC}"
-			echo ""
-			echo "Veillez à bien resoudre les conflits avant la prochaine mise à jour"
-			echo ""
-		else
-			pushall
-		fi
+		git pull
 	else
 		echo "Les branches n'ont pas été fusionnées"
 		exit 0

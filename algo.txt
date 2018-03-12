@@ -31,26 +31,24 @@ is_ahead:
 is_behind
 	git log HEAD..origin/master --oneline
 
-check_diverged:
-si has_diverged alors
-	
-	resoudre a la main ? [y/n]
+
+fetchall
+
+si has_changed alors
+	git status -sb
+
+	Soummettre les changements ? [y/n]
+
+	if exist_unstaged alors
+		git add -A
 
 	si oui alors
+		if exist_uncommitted alors
+			ecrire une descriptions des changements : 
+			commit -m description
+	sinon 
+		mise à jour annulé
 		exit
-	sinon
-		ecrasé master ? [y/n]
-
-		si oui alors
-			pushall
-		sinon
-			dans ce cas fusionner master origin ? [y/n]
-
-			si oui alors
-				git reset --hard
-			sinon
-				mise à jour annulé
-				exit
 
 check_behind:
 si is_behind alors
@@ -68,19 +66,30 @@ si is_behind alors
 		la fusion n'a pas eu lieux
 		exit
 
-	check_diverged
+	check_diverged:
+	si has_diverged alors
+		
+		resoudre a la main ? [y/n]
+
+		si oui alors
+			exit
+		sinon
+			ecrasé master ? [y/n]
+
+			si oui alors
+				pushall
+			sinon
+				dans ce cas fusionner master origin ? [y/n]
+
+				si oui alors
+					git reset --hard
+				sinon
+					mise à jour annulé
+					exit
 
 check_ahead:
 si is_ahead alors
 	
-	git status
+	git push origin master
 
-	mettre a jour ? [y/n]
-
-	si oui alors
-		git add 
-		git commit
-		git push
-	sinon
-		mise à jour annulé
-
+origin

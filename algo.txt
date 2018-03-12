@@ -89,6 +89,7 @@ si is_behind alors
 	si has_diverged
 		resolve_conflicts
 
-
 si is_ahead alors
 	git push origin master
+
+

@@ -91,3 +91,5 @@ si is_behind alors
 
 si is_ahead alors
 	git push origin master
+	
+master

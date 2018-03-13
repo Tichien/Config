@@ -41,7 +41,7 @@ done
 
 # Definition de variables et de fonctions:
 
-# Couleur à utiliser (ex: printf "${COLOR}text${NC}" => affiche "text" en rouge)
+# Couleur à utiliser (ex: echo -e "${COLOR}text${NC}" => affiche "text" en rouge)
 RED='\033[0;31m' # Red color
 GREEN='\033[0;32m' # Green color
 YELLOW='\033[0;33m' # Yellow color

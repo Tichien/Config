@@ -114,14 +114,16 @@ send_changes() {
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 		
 		git add -A
-		
-		COMMIT_MSG="$1"
 
-		if [ -z "$1" ]; then
-			COMMIT_MSG="Mise à jour du $(date)"
-		else
+		COMMIT_MSG="$1"
+		
+		if [ -z "$COMMIT_MSG" ]; then
 			read -p "Quels sont les changements ? : " COMMIT_MSG
 			echo ""
+
+			if [ -z "$COMMIT_MSG" ]; then
+				COMMIT_MSG="Mise à jour du $(date)"
+			fi
 		fi
 
 		git commit -m "$COMMIT_MSG"

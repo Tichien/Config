@@ -181,15 +181,18 @@ resolve_conflicts() {
 		
 			# Si la réponse est oui, on affiche le status de la branche locale et on demande une confirmation
 			if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-				git status -sb
-				echo ""
 
-				read -r -p "Attention, les données qui n'ont pas été envoyées seront perdus, continuer ? [y/n] " response
+				get_status
+
+				read -r -p "Attention, les données non fusionnées seront perdus, continuer ? [y/n] " response
 				echo ""
 			
 				# Si la réponse est oui, on réinitialise la branche locale à partir de master
 				if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 					git reset --hard origin/master
+					echo ""
+					
+					echo -e "${YELLOW}Fusion des données reussi !${NC}"
 				else
 					echo -e "${YELLOW}Utilisez git add, git commit et git push pour resoudre les conflits${NC}"
 					exit 0

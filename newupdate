@@ -213,8 +213,6 @@ if has_diverged; then
 	resolve_conflicts
 fi
 
-# test
-
 if exist_unstaged || exist_uncommitted; then
 	send_changes "$COMMIT_MSG"
 fi

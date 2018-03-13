@@ -126,11 +126,12 @@ send_changes() {
 			fi
 		fi
 
+		echo "Commission des données..."
 		git commit -m "$COMMIT_MSG"
 		echo ""
 
 	else
-		echo "Aucun changements n'a été soumis"
+		echo -e "${BLUE}Aucun changements n'a été soumis${NC}"
 		exit 0
 	fi
 }

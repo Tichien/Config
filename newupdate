@@ -10,7 +10,7 @@ for arg in "$@"; do
 		echo "$0 [OPTIONS]..."
 		echo ""
 		echo "DESCRIPTION:"
-		echo ""
+		echo "" 
 		echo "Ce script a pour but de mettre à jour la branche locale"
 		echo ""
 		echo "Si la branche locale a du retard par rapport à master alors"

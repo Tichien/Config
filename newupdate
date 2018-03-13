@@ -139,7 +139,7 @@ send_changes() {
 	fi
 }
 
-# Permet fusionnée les fichiers en cas de conflits
+# Propose à l'utilisateur des solutions en cas de fichiers non fusionnés
 resolve_conflicts() {
 
 	echo -e "${RED}Attention, des fichiers n'ont pas été fusionnés !${NC}"

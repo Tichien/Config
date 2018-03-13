@@ -44,7 +44,10 @@ done
 # Couleur à utiliser (ex: printf "${COLOR}text${NC}" => affiche "text" en rouge)
 RED='\033[0;31m' # Red color
 GREEN='\033[0;32m' # Green color
+YELLOW='\033[0;33m' # Yellow color
 BLUE='\033[0;34m' # Blue color
+MAGENTA='\033[0;35m' # Magenta color
+CYAN='\033[0;36m' # Cyan color
 NC='\033[0m' # Normal color
 
 # Renvoie vrai si la branche locale a du retard sur master, renvoie faux sinon
@@ -80,7 +83,7 @@ has_diverged() {
 # Recupère les changements apportés à la branche distante, et quitte le programme si aucune connexion n'est possible
 fetch() {
 
-	echo "Recupération des données en ligne..."
+	echo -e "${BLUE}Recupération des données en ligne...${NC}"
 
 	connexion=$(git fetch --all 2>&1)
 	failure=$(echo "$connexion" | grep "unable to access")
@@ -99,7 +102,7 @@ fetch() {
 }
 
 get_status() {
-	echo "Aquisition du status..."
+	echo -e "${BLUE}Aquisition du status...${NC}"
 	git status -sb
 	echo ""
 }
@@ -126,7 +129,7 @@ send_changes() {
 			fi
 		fi
 
-		echo "Commission des données..."
+		echo -e "${BLUE}Commission des données...${NC}"
 		git commit -m "$COMMIT_MSG"
 		echo ""
 
@@ -226,6 +229,7 @@ fi
 
 if is_ahead; then
 
+	echo "${BLUE}Mise en ligne des données...${NC}"
 	git push origin master
 	echo ""
 

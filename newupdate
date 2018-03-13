@@ -229,7 +229,7 @@ fi
 
 if is_ahead; then
 
-	echo "${BLUE}Mise en ligne des données...${NC}"
+	echo -e "${BLUE}Mise en ligne des données...${NC}"
 	git push origin master
 	echo ""
 

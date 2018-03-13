@@ -230,10 +230,11 @@ if is_behind; then
 	echo ""
 		
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+		echo -e "Fusion des données..."
 		git pull
 		echo ""
 	else
-		echo -e "${YELLOW}Les branches n'ont pas été fusionnées${NC}"
+		echo -e "${YELLOW}Fusion des branches annulée${NC}"
 		exit 0
 	fi
  

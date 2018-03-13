@@ -193,7 +193,7 @@ if has_diverged; then
 fi
 
 if exist_unstaged || exist_uncommitted; then
-	send_changes "$COMMIT_MSG"
+	send_changes "lol"
 fi
 
 if is_behind; then

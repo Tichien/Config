@@ -134,7 +134,7 @@ send_changes() {
 		echo ""
 
 	else
-		echo -e "${BLUE}Aucun changements n'a été soumis${NC}"
+		echo -e "${YELLOW}Aucun changements n'a été soumis${NC}"
 		exit 0
 	fi
 }
@@ -150,10 +150,10 @@ resolve_conflicts() {
 
 	# Si la réponse est oui, on quitte le script
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-		echo "Utilisez git add, git commit et git push pour resoudre les conflits"
+		echo -e "${YELLOW}Utilisez git add, git commit et git push pour resoudre les conflits${NC}"
 		exit 0
 	else
-		echo -e "${BLUE}Ne validez que quand vous savez ce que vous faites${NC}"
+		echo -e "${YELLOW}Ne validez que quand vous savez ce que vous faites${NC}"
 		echo ""
 
 		read -r -p "Envoyer les données telles qu'elles en ligne ? [y/n] " response
@@ -179,11 +179,11 @@ resolve_conflicts() {
 				if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
 					git reset --hard origin/master
 				else
-					echo "Utilisez git add, git commit et git push pour resoudre les conflits"
+					echo -e "${YELLOW}Utilisez git add, git commit et git push pour resoudre les conflits${NC}"
 					exit 0
 				fi
 			else
-				echo "Utilisez git add, git commit et git push pour resoudre les conflits"
+				echo -e "${YELLOW}Utilisez git add, git commit et git push pour resoudre les conflits${NC}"
 				exit 0
 			fi
 		fi
@@ -216,10 +216,10 @@ if is_behind; then
 		git pull
 		echo ""
 	else
-		echo "Les branches n'ont pas été fusionnées"
+		echo -e "${YELLOW}Les branches n'ont pas été fusionnées${NC}"
 		exit 0
 	fi
-
+ 
 	if has_diverged; then
 		resolve_conflicts
 	else

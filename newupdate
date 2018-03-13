@@ -206,7 +206,7 @@ fi
 
 if is_behind; then
 
-	echo -e "${BLUE}Aquisition des differences avec master...${NC}" 
+	echo -e "${BLUE}Aquisition des differences...${NC}" 
 	git diff --color --name-status master origin | cat
 	echo ""
 		

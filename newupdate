@@ -206,7 +206,7 @@ fi
 
 if is_behind; then
 
-	git diff --color master origin | cat
+	git diff --name-status --color master origin | cat
 	echo ""
 		
 	read -r -p "La branche locale et la branche distante ont divergé, fusionner les deux branches ? [y/n] " response

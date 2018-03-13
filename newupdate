@@ -39,7 +39,7 @@ for arg in "$@"; do
 	fi
 done
 
-# Definition de variables et de fonctions:
+############################## DEFINITIONS ######################################
 
 # Couleur à utiliser (ex: echo -e "${COLOR}text${NC}" => affiche "text" en rouge)
 RED='\033[0;31m' # Red color
@@ -107,7 +107,7 @@ get_status() {
 	echo ""
 }
 
-push_on_line() {
+push_changes() {
 	echo -e "${BLUE}Mise en ligne des données...${NC}"
 	git push origin master
 	echo ""
@@ -174,7 +174,7 @@ resolve_conflicts() {
 
 		# Si la réponse est oui, on envoi les données en ligne
 		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-			push_on_line
+			push_changes
 		else
 			read -r -p "Reinitialiser les données à partir de la branche distante ? [y/n] " response
 			echo ""
@@ -204,6 +204,9 @@ resolve_conflicts() {
 		fi
 	fi
 }
+
+
+############################## SCRIPT ######################################
 
 fetch
 
@@ -243,6 +246,6 @@ if is_behind; then
 fi
 
 if is_ahead; then
-	push_on_line
+	push_changes
 fi
 

@@ -107,6 +107,19 @@ get_status() {
 	echo ""
 }
 
+push_on_line() {
+	echo -e "${BLUE}Mise en ligne des données...${NC}"
+	git push origin master
+	echo ""
+
+	if exist_unpushed; then
+		echo -e "${RED}Mise en ligne des données echouée !${NC}"
+		exit 1
+	fi
+
+	echo -e "${GREEN}Mise en ligne des données reussi !${NC}"
+}
+
 # Ajoute tous les fichiers qui ne le sont pas, dans l'index "staged", puis envoie un commit avec le message passé en paramètre.
 # Si aucun message n'est entré en paramètre alors le commit enverra la date et l'heure en message. 
 send_changes() {
@@ -161,8 +174,7 @@ resolve_conflicts() {
 
 		# Si la réponse est oui, on envoi les données en ligne
 		if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-			send_changes "$COMMIT_MSG"
-			git push origin master
+			push_on_line
 		else
 			read -r -p "Reinitialiser les données à partir de la branche distante ? [y/n] " response
 			echo ""
@@ -230,16 +242,6 @@ if is_behind; then
 fi
 
 if is_ahead; then
-
-	echo -e "${BLUE}Mise en ligne des données...${NC}"
-	git push origin master
-	echo ""
-
-	if exist_unpushed; then
-		echo -e "${RED}Mise en ligne des données echouée !${NC}"
-		exit 1
-	fi
-
-	echo -e "${GREEN}Mise en ligne des données reussi !${NC}"
+	push_on_line
 fi
 

@@ -2,15 +2,15 @@
 	//CURSOR MOUVEMENT
 
 	//move to previous/next character
-	//{ "keys": ["alt+j"], "command": "move", "args": {"by": "characters", "forward": false} },
-	//{ "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+	{ "keys": ["alt+j"], "command": "move", "args": {"by": "characters", "forward": false} },
+	{ "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
 	//select previous/next character
 	{ "keys": ["alt+shift+j"], "command": "move", "args": { "by": "characters", "forward": false, "extend": true } },
 	{ "keys": ["alt+shift+l"], "command": "move", "args": { "by": "characters", "forward": true, "extend": true } },
 
 	//move to previous/next line
-	//{ "keys": ["alt+i"], "command": "move", "args": {"by": "lines", "forward": false} },
-	//{ "keys": ["alt+k"], "command": "move", "args": {"by": "lines", "forward": true} },
+	{ "keys": ["alt+i"], "command": "move", "args": {"by": "lines", "forward": false} },
+	{ "keys": ["alt+k"], "command": "move", "args": {"by": "lines", "forward": true} },
 	//select previous/next line
 	{ "keys": ["alt+shift+i"], "command": "move", "args": { "by": "lines", "forward": false, "extend": true } },
 	{ "keys": ["alt+shift+k"], "command": "move", "args": { "by": "lines", "forward": true, "extend": true } },
@@ -46,19 +46,13 @@
 	{ "keys": ["alt+shift+h"], "command": "move", "args": {"by": "pages", "forward": true, "extend": true} },
 
 	//move to file start/end
-	{ "keys": ["ctrl+y"], "command": "move_to", "args": {"to": "bof", "extend": false} },
-	{ "keys": ["ctrl+h"], "command": "move_to", "args": {"to": "eof", "extend": false} },
+	//{ "keys": ["ctrl+y"], "command": "move_to", "args": {"to": "bof", "extend": false} },
+	//{ "keys": ["ctrl+h"], "command": "move_to", "args": {"to": "eof", "extend": false} },
 	//select from cursor to file start/end
-	{ "keys": ["ctrl+shift+y"], "command": "move_to", "args": {"to": "bof", "extend": true} },
-	{ "keys": ["ctrl+shift+h"], "command": "move_to", "args": {"to": "eof", "extend": true} },
+	//{ "keys": ["ctrl+shift+y"], "command": "move_to", "args": {"to": "bof", "extend": true} },
+	//{ "keys": ["ctrl+shift+h"], "command": "move_to", "args": {"to": "eof", "extend": true} },
 
 ////////////////////////
-
-	{ "keys": ["ctrl+r"], "command": "redo_or_repeat" },
-
-	//indent/unident
-	//{ "keys": ["alt+r"], "command": "indent" },
-	//{ "keys": ["alt+e"], "command": "unindent" },
 
 	//move to previous/next view
 	{ "keys": ["alt+,"], "command": "prev_view" },
@@ -85,9 +79,6 @@
 	//select all matches
 	{ "keys": ["alt+s"], "command": "find_all_under" },
 
-	//{ "keys": ["alt+f"], "command": "append_seletion"},
-
-
 	{ "keys": ["alt+w"], "command": "split_selection_into_lines" },
 	{ "keys": ["alt+a"], "command": "expand_selection", "args": {"to": "line"} },
 
@@ -101,58 +92,11 @@
 	//{ "keys": ["alt+z"], "command": "expand_selection", "args": {"to": "brackets"} },
 	//{ "keys": ["alt+shift+z"], "command": "move_to", "args": {"to": "brackets"} },
 
-	{ "keys": ["alt+m"], "command": "toggle_bookmark" },
-	{ "keys": ["alt+shift+m"], "command": "select_all_bookmarks" },
+	{ "keys": ["ctrl+m"], "command": "toggle_bookmark" },
+	{ "keys": ["ctrl+shift+m"], "command": "select_all_bookmarks" },
 	
 	{ "keys": ["alt+ctrl+m"], "command": "clear_bookmarks" },
 
-	//{ "keys": ["f2"], "command": "next_bookmark" },
-	{ "keys": ["shift+f2"], "command": "prev_bookmark" },
-
-/*
-	// goto block up
-	{
-		"keys": ["alt+!"],
-		"command": "run_macro_file",
-		"args": { "file": "Packages/Expression/macro/goto_block_up.sublime-macro" },
-		"context": { "key": "setting.sublime_enhanced_keybindings", "operator": "equal", "operand": true }
-	},
-	// goto block down
-	{
-		"keys": ["alt+:"],
-		"command": "run_macro_file",
-		"args": { "file": "Packages/Expression/macro/goto_block_down.sublime-macro" },
-		"context": { "key": "setting.sublime_enhanced_keybindings", "operator": "equal", "operand": true }
-	},
-
-	//nesting back
-	{
-    "keys": ["alt+e"],
-    "command": "run_macro_file",
-    "args": {
-      "file": "Packages/Expression/macro/goto_end_of_next_nesting.sublime-macro"
-    },
-    "context": 
-      {"key": "setting.sublime_enhanced_keybindings", "operator": "equal", "operand": true}
-	},
-
-	//nesting forward
-	  {
-    "keys": ["alt+r"],
-    "command": "run_macro_file",
-    "args": {
-      "file": "Packages/Expression/macro/goto_in_nesting_backward.sublime-macro"
-    },
-    "context": 
-      {"key": "setting.sublime_enhanced_keybindings", "operator": "equal", "operand": true}
-    
-	},
-	*/
+	{ "keys": ["alt+m"], "command": "next_bookmark" },
+	{ "keys": ["alt+shift+m"], "command": "prev_bookmark" },
 ]
-/*
-1 = lion
-2 = elephant
-3 = buffalo
-4 = leopard
-5 = rhinoceros
-*/

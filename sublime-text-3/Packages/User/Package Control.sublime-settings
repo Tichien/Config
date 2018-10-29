@@ -1,0 +1,30 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AlignTab",
+		"AppendSelection",
+		"BracketHighlighter",
+		"Case Conversion",
+		"Clang Format",
+		"Column Select",
+		"DocBlockr",
+		"EasyClangComplete",
+		"GitGutter",
+		"JavaScript Completions",
+		"Javatar",
+		"Move By Paragraph",
+		"OmniMarkupPreviewer",
+		"Package Control",
+		"Random Everything",
+		"SideBarEnhancements",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"Terminal",
+		"UnicodeMath",
+		"UnicodeTeX"
+	]
+}

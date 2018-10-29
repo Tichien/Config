@@ -1,5 +1,5 @@
 [
-	//CURSOR MOUVEMENT
+	//CURSOR MOUVEMENT 
 
 	//move to previous/next character
 	{ "keys": ["alt+j"], "command": "move", "args": {"by": "characters", "forward": false} },
@@ -22,7 +22,7 @@
 	{ "keys": ["ctrl+shift+j"], "command": "move", "args": {"by": "words", "forward": false, "extend": true} },
 	{ "keys": ["ctrl+shift+l"], "command": "move", "args": {"by": "word_ends", "forward": true, "extend": true} },
 
-////////////////////////
+
 
 	//move to previous/next paragraph
 	{ "keys": ["ctrl+i"], "command": "move_by_paragraph", "args": {"forward": false} },
@@ -56,7 +56,7 @@
 	{ "keys": ["alt+,"], "command": "prev_view" },
 	{ "keys": ["alt+:"], "command": "next_view" },
 
-////////////////////////
+
 
 	//swap line up/down
 	{ "keys": ["ctrl+alt+i"], "command": "swap_line_up" },
@@ -76,14 +76,9 @@
 	//move to find and expand
 	{ "keys": ["alt+d"], "command": "append_seletion", "args": { "backward": true } },
 	{ "keys": ["alt+f"], "command": "append_seletion", "args": { "backward": false } },
-	//{ "keys": ["alt+f"], "command": "find_under_expand" },
 	
 	//skip next find and expand
 	{ "keys": ["alt+shift+d"], "command": "append_seletion", "args": { "repeat_last_with_skip": true } },
-
-	//select the inside of the nearest bracket
-	//{ "keys": ["alt+z"], "command": "expand_selection", "args": {"to": "brackets"} },
-	//{ "keys": ["alt+shift+z"], "command": "move_to", "args": {"to": "brackets"} },
 
 	{ "keys": ["ctrl+m"], "command": "toggle_bookmark" },
 	{ "keys": ["ctrl+shift+m"], "command": "select_all_bookmarks" },
